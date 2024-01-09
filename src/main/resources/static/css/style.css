@@ -1,0 +1,34 @@
+body {
+  background: #fff !important;
+}
+
+.bg-primary {
+  background: #009688 !important;
+}
+/*Side bar content
+.content {
+  margin-left: 20%;
+  margin-top: 70px;
+  margin-top: 0;
+}*/
+.navbar-dark.bg-primary {
+  background-color: black !important; /* Change the background color to black */
+}
+
+.navbar-dark.bg-primary .navbar-nav .nav-link {
+  color: white !important; /* Change the text color to white */
+}
+.text-truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+item-1 {
+  background-color: #dd712f;
+  color: white;
+}
+.get-parent-button-class {
+  background-color: #dd712f;
+  color: #ffffff;
+}

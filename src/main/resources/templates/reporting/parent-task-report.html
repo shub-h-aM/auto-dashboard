@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="reporting/report-base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <section>
+      <div class="container-date-1 parent-date-class">
+        <div class="item-1 date-container">
+          <input
+            type="date"
+            id="fromDateInput"
+            name="fromDate"
+            onchange="saveDate('fromDate')"
+          />
+        </div>
+        <div class="item-1 date-container">
+          <input
+            type="date"
+            id="toDateInput"
+            name="toDate"
+            onchange="saveDate('toDate')"
+          />
+        </div>
+        <div class="item-1">
+          <input
+            class="export-parent-button-class parent-button"
+            id="downloadReportButton"
+            type="button"
+            name="Get Parent Report"
+            value="Get Parent Report"
+            onclick="getParentReport()"
+          />
+        </div>
+        <div class="item-1">
+          <input
+            class="download-report-button-class parent-button"
+            type="button"
+            name="Download Parent Report"
+            value="Download Parent Report"
+            onclick="downloadReport()"
+          />
+        </div>
+      </div>
+
+      <div class="card-container-top">
+        <div class="card-1 p-3 mb-2 bg-info text-white">
+          <h5>Task Released</h5>
+          <p th:text="${released}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bg-warning text-white">
+          <h5>Blocker</h5>
+          <p th:text="${blocker}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bg-danger text-white">
+          <h5>Rejection</h5>
+          <p th:text="${rejection}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bg-primary text-white">
+          <h5>QA Suggestion</h5>
+          <p th:text="${suggestion}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bg-success text-white">
+          <h5>Enhancement</h5>
+          <p th:text="${enhancement}"></p>
+        </div>
+        <div
+          class="card-1 p-3 mb-2 bg-success text-white automation-card-style"
+        >
+          <h5>Automation Suite Used</h5>
+          <p th:text="${enhancement}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bg-dark text-white">
+          <h5>Automation Tasks</h5>
+          <p th:text="${enhancement}"></p>
+        </div>
+        <div class="card-1 p-3 mb-2 bug-card-style text-white">
+          <h5>Bug Reported</h5>
+          <p th:text="${enhancement}"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- Add card body according to define the table header horizontal size -->
+        <div class="card-body">
+          <table class="table">
+            <thead class="p-3 mb-2 bg-secondary text-white">
+              <tr>
+                <th scope="col">Task Id</th>
+                <th scope="col" class="text-truncate">Title</th>
+                <th scope="col">QA Owner</th>
+                <th scope="col">Status</th>
+                <th scope="col">Automation Ticket</th>
+                <th scope="col">Blockers</th>
+                <th scope="col">Rejection</th>
+                <th scope="col">Enhancement</th>
+                <th scope="col">Suggestion</th>
+                <th scope="col">Auto. Suite Used</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="c:${parentTaskDTOPage}">
+                <td th:text="${c.parentTicketId}"></td>
+                <td th:text="${c.parentTicketTitle}"></td>
+                <td th:text="${c.qaOwner}"></td>
+                <td th:text="${c.status}"></td>
+                <td th:text="${c.automationTicket}"></td>
+                <td th:text="${c.noOfBlocker}"></td>
+                <td th:text="${c.noOfRejection}"></td>
+                <td th:text="${c.noOfEnhancement}"></td>
+                <td th:text="${c.qaSuggestion}"></td>
+                <td th:text="${c.automationSanitySuiteUsed}"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <nav aria-label="Page navigation" th:if="${totalPages > 1}">
+            <input type="hidden" id="currentPage" value="1" />
+            <ul class="pagination">
+              <li th:if="${currentPage != 0}" class="page-item">
+                <a class="page-link previous-link" href="#">Previous</a>
+              </li>
+
+              <th:block
+                th:with="startPage=${currentPage-2 <= 1 ? 1 : currentPage-2}, endPage=${(currentPage+2 > totalPages) ? totalPages : currentPage+2}"
+              >
+                <li
+                  th:classappend="${currentPage==pageNo?'active':''}"
+                  th:each="pageNo:${#numbers.sequence(startPage, endPage)}"
+                  class="page-item"
+                >
+                  <a class="page-link" id="NumberNextPageLink" href="#">
+                    <span th:text="${pageNo}"></span>
+                  </a>
+                </li>
+              </th:block>
+
+              <li th:if="${currentPage+1 < totalPages}" class="page-item">
+                <a id="nextPageLink" class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

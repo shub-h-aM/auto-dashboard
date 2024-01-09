@@ -1,0 +1,49 @@
+.card-container-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust alignment as needed */
+  overflow-x: auto;
+  padding-top: 10px;
+}
+
+/* Add CSS styles for your card here */
+.card-1 {
+  flex: 1; /* Allow cards to take equal width within the container */
+  max-width: calc(
+    33.33% - 20px
+  ); /* Adjust the max-width to control card spacing */
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 1px;
+  font-family: Arial, sans-serif;
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  white-space: nowrap; /* Prevent card content from wrapping */
+}
+
+.card-1 h5 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+thead {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card .card-body {
+  padding: 0px !important;
+}
+.card-container-top p {
+  margin: 0px !important;
+}
+.card-container-top .automation-card-style {
+  background-color: #f56b08f7 !important;
+}
+.card-container-top .bug-card-style {
+  background-color: #af0372 !important;
+}

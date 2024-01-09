@@ -1,0 +1,15 @@
+/* Common button styles */
+.parent-button {
+  display: block;
+  background-color: #dd712f;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+/* Hover style for all buttons */
+.parent-button:hover {
+  background-color: #2980b9;
+}

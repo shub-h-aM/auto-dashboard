@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="reporting/report-base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <section>
+      <div class="container-date-1 parent-date-class">
+        <div class="item-1 date-container">
+          <input
+            type="date"
+            id="fromDateInput"
+            name="fromDate"
+            onchange="saveDate('fromDate')"
+          />
+        </div>
+        <div class="item-1 date-container">
+          <input
+            type="date"
+            id="toDateInput"
+            name="toDate"
+            onchange="saveDate('toDate')"
+          />
+        </div>
+        <div class="item-1">
+          <input
+            class="export-parent-button-class parent-button"
+            id="downloadReportButton"
+            type="button"
+            name="Get Bug Report"
+            value="Get Bub Report"
+            onclick="getBugReport()"
+          />
+        </div>
+        <div class="item-1">
+          <input
+            class="download-report-button-class parent-button"
+            type="button"
+            name="Download Report"
+            value="Download Report"
+            onclick="showFeaturePopUp()"
+          />
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <table class="table">
+            <thead class="p-3 mb-2 bg-secondary text-white">
+              <tr>
+                <th scope="col">Task Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Parent Ticket</th>
+                <th scope="col">QA Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="c:${bugReportDTOPage}">
+                <td th:text="${c.ticketId}"></td>
+                <td th:text="${c.title}"></td>
+                <td th:text="${c.parentTicketId}"></td>
+                <td th:text="${c.qaOwner}"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <nav aria-label="Page navigation" th:if="${totalPages > 1}">
+            <input type="hidden" id="currentBugPage" value="1" />
+            <ul class="pagination">
+              <li th:if="${currentBugPage != 0}" class="page-item">
+                <a class="page-link previous-link" href="#">Previous</a>
+              </li>
+
+              <th:block
+                th:with="startPage=${currentBugPage-2 <= 1 ? 1 : currentBugPage-2}, endPage=${(currentBugPage+2 > totalPages) ? totalPages : currentBugPage+2}"
+              >
+                <li
+                  th:classappend="${currentBugPage==pageNo?'active':''}"
+                  th:each="pageNo:${#numbers.sequence(startPage, endPage)}"
+                  class="page-item"
+                >
+                  <a class="page-link" id="NumberNextPageLink" href="#">
+                    <span th:text="${pageNo}"></span>
+                  </a>
+                </li>
+              </th:block>
+
+              <li th:if="${currentBugPage+1 < totalPages}" class="page-item">
+                <a id="nextPageLink" class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

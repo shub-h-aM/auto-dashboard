@@ -1,0 +1,13 @@
+.item-1 {
+  flex: 1;
+  margin: 0 1%;
+  color: white;
+
+  text-align: center;
+}
+.parent-date-class {
+  display: flex;
+  padding: 1% 1% 1%;
+  border: 1px dashed;
+  margin: 1% 10%;
+}

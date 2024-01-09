@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="reporting/report-base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <section>
+      <div class="date-container">
+          <label for="fromDate">From Date:</label>
+          <input type="date" id="fromDate" name="fromDate">
+          <label for="toDate">To Date:</label>
+          <input type="date" id="toDate" name="toDate">
+      </div>
+      </div>
+      <div class="upload-form-container">
+        <form
+          id="upload-form"
+          class="upload-form"
+          action="report/upload"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input
+            class="form-input"
+            type="file"
+            name="file"
+            id="file"
+            accept=".xlsx"
+          />
+          <br /><br />
+
+        </form>
+       <div class="container-button">
+           <input
+                   class="upload-button parent-button"
+                   type="button"
+                   name="submit"
+                   value="Upload"
+                   onclick="submitForm()"
+           />
+           <input
+                   class="upload-button parent-button"
+                   type="button"
+                   name="Download Template"
+                   value="Download Template"
+                   onclick="downloadTemplate()"
+           />
+       </div>
+        <!-- Loader -->
+        <div id="loader" class="hidden"></div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="hidden"></div>
+      </div>
+    </section>
+  </body>
+</html>
